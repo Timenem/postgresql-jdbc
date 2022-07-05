@@ -38,3 +38,8 @@ select name,city,per_diem,date_first,date_last from trip where name like '%а %'
 
 #Вывести в алфавитном порядке фамилии и инициалы тех сотрудников, которые были в командировке в Москве.
 select name from trip where city='Москва' GROUP BY name ORDER BY name;
+
+
+#Для каждого города посчитать, сколько раз сотрудники в нем были.  Информацию вывести в отсортированном в алфавитном порядке по названию городов.
+#Вычисляемый столбец назвать Количество. 
+select city, (SELECT count(city)) as Количество from trip group by city  ORDER BY city asc;
