@@ -43,3 +43,7 @@ select name from trip where city='Москва' GROUP BY name ORDER BY name;
 #Для каждого города посчитать, сколько раз сотрудники в нем были.  Информацию вывести в отсортированном в алфавитном порядке по названию городов.
 #Вычисляемый столбец назвать Количество. 
 select city, (SELECT count(city)) as Количество from trip group by city  ORDER BY city asc;
+
+
+#Вывести два города, в которых чаще всего были в командировках сотрудники. Вычисляемый столбец назвать Количество.
+SELECT city , (SELECT COUNT(city)) As количество FROM trip GROUP BY city  ORDER BY количество DESC  LIMIT 2;
