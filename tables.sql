@@ -34,3 +34,7 @@ values
 #фамилия которых заканчивается на букву «а», в отсортированном по убыванию даты последнего дня командировки виде. 
 #В результат включить столбцы name, city, per_diem, date_first, date_last.
 select name,city,per_diem,date_first,date_last from trip where name like '%а %' order by date_first desc; 
+
+
+#Вывести в алфавитном порядке фамилии и инициалы тех сотрудников, которые были в командировке в Москве.
+select name from trip where city='Москва' GROUP BY name ORDER BY name;
