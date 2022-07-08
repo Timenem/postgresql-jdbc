@@ -61,3 +61,9 @@ SELECT name,city,date_first,date_last FROM trip
 WHERE EXTRACT(DAY FROM date_last::TIMESTAMP - date_first::TIMESTAMP) IN (
     SELECT MIN(EXTRACT(DAY FROM date_last::TIMESTAMP-date_first::TIMESTAMP))
     FROM trip );
+    
+#Вывести информацию о командировках, начало и конец которых относятся к одному месяцу (год может быть любой).
+#В результат включить столбцы name, city, date_first, date_last.
+#Строки отсортировать сначала  в алфавитном порядке по названию города, а затем по фамилии сотрудника .
+SELECT name,city,date_first,date_last FROM trip 
+WHERE EXTRACT(MONTH from date_first::TIMESTAMP) = EXTRACT(MONTH from date_last::TIMESTAMP)  ORDER BY city, name ;
