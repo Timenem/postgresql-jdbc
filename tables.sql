@@ -54,3 +54,10 @@ SELECT city , (SELECT COUNT(city)) As количество FROM trip GROUP BY ci
 #Последний столбец назвать Длительность. Информацию вывести в упорядоченном по убыванию длительности поездки, а потом по убыванию названий городов (в обратном алфавитном порядке).
 select name ,city ,  extract(day from date_last::timestamp - date_first::timestamp)+1 as Длительность from trip
 WHERE city not in ('Москва','Санкт-Петербург') ORDER BY Длительность DESC ;
+
+
+#Вывести информацию о командировках сотрудника(ов), которые были самыми короткими по времени. В результат включить столбцы name, city, date_first, date_last.
+SELECT name,city,date_first,date_last FROM trip
+WHERE EXTRACT(DAY FROM date_last::TIMESTAMP - date_first::TIMESTAMP) IN (
+    SELECT MIN(EXTRACT(DAY FROM date_last::TIMESTAMP-date_first::TIMESTAMP))
+    FROM trip );
