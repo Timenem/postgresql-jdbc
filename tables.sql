@@ -67,3 +67,10 @@ WHERE EXTRACT(DAY FROM date_last::TIMESTAMP - date_first::TIMESTAMP) IN (
 #Строки отсортировать сначала  в алфавитном порядке по названию города, а затем по фамилии сотрудника .
 SELECT name,city,date_first,date_last FROM trip 
 WHERE EXTRACT(MONTH from date_first::TIMESTAMP) = EXTRACT(MONTH from date_last::TIMESTAMP)  ORDER BY city, name ;
+
+
+#Вывести название месяца и количество командировок для каждого месяца. 
+#Считаем, что командировка относится к некоторому месяцу, если она началась в этом месяце.
+#Информацию вывести сначала в отсортированном по убыванию количества, а потом в алфавитном  порядке по названию месяца виде.
+#Название столбцов – Месяц и Количество
+SELECT to_char(date_first, 'Month') as Месяц ,(SELECT COUNT(date_first)) as Количество from trip GROUP by Месяц ORDER BY Количество DESC ;
