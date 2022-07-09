@@ -74,3 +74,15 @@ WHERE EXTRACT(MONTH from date_first::TIMESTAMP) = EXTRACT(MONTH from date_last::
 #Информацию вывести сначала в отсортированном по убыванию количества, а потом в алфавитном  порядке по названию месяца виде.
 #Название столбцов – Месяц и Количество
 SELECT to_char(date_first, 'Month') as Месяц ,(SELECT COUNT(date_first)) as Количество from trip GROUP by Месяц ORDER BY Количество DESC ;
+
+
+
+#Вывести сумму суточных (произведение количества дней командировки и размера суточных)
+#для командировок, первый день которых пришелся на февраль или март 2020 года. 
+#Значение суточных для каждой командировки занесено в столбец per_diem. 
+#Вывести фамилию и инициалы сотрудника, город, первый день командировки и сумму суточных.
+#Последний столбец назвать Сумма. 
+#Информацию отсортировать сначала  в алфавитном порядке по фамилиям сотрудников, а затем по убыванию суммы суточных.
+SELECT name,city,date_first,
+EXTRACT(day from date_last::TIMESTAMP -date_first::TIMESTAMP) * per_diem as Сумма  
+from trip WHERE EXTRACT (MONTH from date_first::TIMESTAMP)=2 or EXTRACT(MONTH from date_first::TIMESTAMP)=3 oRDER BY name , Сумма;
