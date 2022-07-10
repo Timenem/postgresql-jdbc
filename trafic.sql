@@ -32,3 +32,16 @@ INSERT INTO traffic_violation (violation, sum_fine)
 VALUES ('Превышение скорости(от 20 до 40)', 500),
        ('Превышение скорости(от 40 до 60)', 1000),
        ('Проезд на запрещающий сигнал', 1000);
+
+
+
+
+
+#Занести в таблицу fine суммы штрафов, которые должен оплатить водитель, 
+#в соответствии с данными из таблицы traffic_violation.
+#При этом суммы заносить только в пустые поля столбца  sum_fine.
+UPDATE fine
+SET sum_fine=(SELECT sum_fine FROM traffic_violation WHERE traffic_violation.violation=fine.violation)
+WHERE sum_fine isNULL;
+
+SELECT * from fine;
