@@ -61,7 +61,8 @@ HAVING  COUNT(*) >1  ORDER BY name, number_plate, violation;
 
 
 
-
+#Удалить из таблицы fine информацию о нарушениях, совершенных раньше 1 февраля 2020 года. 
+DELETE  from fine WHERE date_violation < '2020-02-01';
 
 
 
