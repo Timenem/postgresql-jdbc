@@ -33,6 +33,27 @@ CREATE TABLE book (
     FOREIGN KEY (genre_id) REFERENCES genre (genre_id) on DELETE SET NULL
 );
 
+
+
+#Вывести название, жанр и цену тех книг, количество которых больше 8, в отсортированном по убыванию цены виде.
+SELECT title, name_genre, price
+FROM 
+    genre INNER JOIN book
+    ON genre.genre_id = book.genre_id
+WHERE book.amount >= 8
+ORDER BY price DESC;
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 insert INTO author (name_author) values
     ('Булгаков М.А.'),
