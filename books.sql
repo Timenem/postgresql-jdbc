@@ -63,6 +63,24 @@ FROM genre LEFT JOIN book
 ON genre.genre_id = book.genre_id
 WHERE title IS NULL;
 
+create table citi (
+    city_id int not null , 
+    name_city varchar(50)
+);
+
+
+
+Оператор перекрёстного соединения, или декартова произведения CROSS JOIN (в запросе вместо ключевых слов можно поставить запятую между таблицами) 
+соединяет две таблицы. Порядок таблиц для оператора неважен, поскольку оператор является симметричным. Его структура:
+select ... from table1 CROSS table2 ORDER BY table1.row;
+SELECT
+    name_city,
+    name_author,
+    date('2020-01-01'::date + trunc(random() * 365) * '1 day'::interval) AS Дата
+FROM city CROSS JOIN author ORDER BY name_city , Дата DESC;
+
+
+
 /*
 insert INTO author (name_author) values
     ('Булгаков М.А.'),
