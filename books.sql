@@ -63,12 +63,12 @@ FROM genre LEFT JOIN book
 ON genre.genre_id = book.genre_id
 WHERE title IS NULL;
 
-create table citi (
+create table city (
     city_id int not null , 
     name_city varchar(50)
 );
 
-
+#CROSS JOIN 
 
 Оператор перекрёстного соединения, или декартова произведения CROSS JOIN (в запросе вместо ключевых слов можно поставить запятую между таблицами) 
 соединяет две таблицы. Порядок таблиц для оператора неважен, поскольку оператор является симметричным. Его структура:
@@ -79,7 +79,21 @@ SELECT
     date('2020-01-01'::date + trunc(random() * 365) * '1 day'::interval) AS Дата
 FROM city CROSS JOIN author ORDER BY name_city , Дата DESC;
 
+#INNER JOIN 
+Запрос на выборку может выбирать данные из двух и более таблиц базы данных. 
+При этом таблицы должны быть логически связаны между собой. Для каждой пары таблиц, включаемых в запрос, необходимо указать свой оператор соединения.
+Наиболее распространенным является внутреннее соединение INNER JOIN .
+SELECT ... FROM  table1 INNER JOIN table2 ON talbe1.id = table2.id 
+                        INNER JOIN table3 on table3.id = table2.id 
+           WHERE ....;
 
+SELECT name_genre, title, name_author  
+FROM
+    author 
+    INNER JOIN  book ON author.author_id = book.author_id
+    INNER JOIN genre ON genre.genre_id = book.genre_id
+WHERE name_genre = 'Роман'
+ORDER BY title;
 
 /*
 insert INTO author (name_author) values
