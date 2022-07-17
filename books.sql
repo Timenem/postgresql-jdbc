@@ -95,12 +95,18 @@ FROM
 WHERE name_genre = 'Роман'
 ORDER BY title;
 
-/*
-insert INTO author (name_author) values
-    ('Булгаков М.А.'),
-    ('Достоевский Ф.М.'),
-    ('Есенин С.А.'),
-    ('Пастернак Б.Л.');
-*/
-  
+
+
+#Вывести в алфавитном порядке всех авторов, которые пишут только в одном жанре.
+#Поскольку у нас в таблицах так занесены данные, что у каждого автора книги только в одном жанре, 
+#для этого запроса внесем изменения в таблицу book. 
+#Пусть у нас  книга Есенина «Черный человек» относится к жанру «Роман», а книга Булгакова «Белая гвардия» к «Приключениям».
+SELECT name_author
+FROM    (SELECT name_author, genre_id
+                 FROM book
+                 INNER JOIN author ON author.author_id = book.author_id
+                 GROUP BY name_author, genre_id) AS temp
+GROUP BY name_author
+HAVING COUNT(name_author) = 1
+
   
